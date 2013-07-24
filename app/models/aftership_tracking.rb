@@ -12,10 +12,9 @@ class AftershipTracking < ActiveRecord::Base
     end
 
     begin
-
       post_data = {"api_key" => Spree::Aftership::Config[:api_key], "tracking_number" => tracking, "emails" => [email], "source" => "Spree Order: #{order_number}", "title" => order_number}
 
-      request = HTTPI::Request.new("https://api.aftership.com/v1/trackings")
+      request = HTTPI::Request.new("https://api.aftership.com/v2/trackings")
       request.body = post_body_from_hash(post_data)
       response = HTTPI.post(request)
 
